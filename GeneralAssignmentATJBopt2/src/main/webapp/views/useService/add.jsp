@@ -20,52 +20,66 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
-	crossorigin="anonymous"></script>
-<title>CM | Add Computer</title>
+	crossorigin="anonymous"></script>	
+<title>CM | Register to use the service</title>
 <link rel="stylesheet" href="/GeneralAssignmentATJBopt2/resources/css/index.css">
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
 	<div class="container mt-2">
 		<div class="d-flex justify-content-center my-2">
-			<h3>Add computer</h3>
+			<h3>Register to use the service</h3>
 		</div>
 		<form:form id="form" class="border p-4" method="POST"
-			action="/GeneralAssignmentATJBopt2/computer/saveAdd"
-			modelAttribute="computer">
-				<c:if test='${messageError != null}'>
-					<div class="form-group">
-						<div class="alert alert-danger" role="alert">
-						  ${messageError}
-						</div>
+			action="/GeneralAssignmentATJBopt2/useService/saveAdd"
+			modelAttribute="useService">
+			<c:if test='${messageError != null}'>
+				<div class="form-group">
+					<div class="alert alert-danger" role="alert">
+					  ${messageError}
 					</div>
-				</c:if>
+				</div>
+			</c:if>
 				
 			<div class="form-group">
-				<label for="inputMaMay">Mã máy</label> 
-				<form:input type="text" class="form-control" id="inputMaMay" path="maMay" placeholder="Nhập mã máy..." value="${computer.maMay}"/> 
-					<span class="form-message">Messeage...</span>
-			</div>
-			<div class="form-group">
-				<label for="inputViTri">Vị trí</label> 
-				<form:input type="text" class="form-control" id="inputViTri" path="viTri" placeholder="Nhập vị trí..." value="${computer.viTri}"/> 
-					<span class="form-message">Messeage...</span>
-			</div>
-			<div class="form-group">
-				<label for="inputMaMay">Trạng thái</label> 
-				<form:select
-					class="custom-select" id="inputTrangThai" path="trangThai" value="${computer.trangThai}">
+				<label for="maKH">Mã khách hàng</label>  
+				<form:select class="custom-select" id="maKH" path="maKH" value="${useService.maKH}">
 					<form:option value="">--Không chọn--</form:option>
-					<form:option value="Dang ranh">Đang rảnh</form:option>
-					<form:option value="Dang dung">Đang dùng</form:option>
-					<form:option value="Dang sua chua">Đang sửa chữa</form:option>
+					<c:forEach items="${customers}" var="customer">
+						<form:option value="${customer.maKH}">${customer.maKH}</form:option>
+					</c:forEach>
 				</form:select> 
+				<span class="form-message">Messeage...</span>
+			</div>
+			<div class="form-group">
+				<label for="maDV">Mã dịch vụ</label> 
+				<form:select class="custom-select" id="maDV" path="maDV" value="${useService.maDV}">
+					<form:option value="">--Không chọn--</form:option>
+					<c:forEach items="${services}" var="service">
+						<form:option value="${service.maDV}">${service.maDV}</form:option>
+					</c:forEach>
+				</form:select> 
+				<span class="form-message">Messeage...</span>
+			</div>
+			<div class="form-group">
+				<label for="ngaySuDung">Ngày sử dụng</label> 
+				<form:input type="date" class="form-control" id="ngaySuDung" path="ngaySuDung" value="${useService.ngaySuDung}"/> 
+				<span class="form-message">Messeage...</span>
+			</div>
+			<div class="form-group">
+				<label for="gioSuDung">Thời gian sử dụng</label> 
+				<form:input type="time" class="form-control without_ampm" id="gioSuDung" path="gioSuDung" value="${useService.gioSuDung}"/> 
+				<span class="form-message">Messeage...</span>
+			</div>
+			<div class="form-group">
+				<label for="soLuong">Số lượng</label> 
+				<form:input type="number" class="form-control" id="soLuong" path="soLuong" placeholder="Nhập số lượng..." value="${useService.soLuong}"/> 
 				<span class="form-message">Messeage...</span>
 			</div>
 			<div class="d-flex justify-content-end w-100">
 				<button type="reset" class="btn btn-outline-white border mr-auto">Clear</button>
 				<button type="submit" class="btn btn-primary mr-2">Create</button>
-				<a href="/GeneralAssignmentATJBopt2/customer/" class="mr-2">
+				<a href="/GeneralAssignmentATJBopt2/useService/" class="mr-2">
 					<button type="button" class="btn btn-outline-white border">Back</button>
 				</a>
 			</div>
@@ -87,16 +101,27 @@
 	<script src="/GeneralAssignmentATJBopt2/resources/js/Validator.js"></script>
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
+			var currentDate = new Date().toISOString().split("T")[0];
+			var currentTime = new Date().toISOString().substring(11,16);
+			document.getElementById("ngaySuDung").value = currentDate;
+			document.getElementById("ngaySuDung").setAttribute("max",currentDate);
+			document.getElementById("gioSuDung").value = currentTime;
+			
 			Validator({
 				form : '#form',
 				formGroupSelector : '.form-group',
 				errorSelector : '.form-message',
 				rules : [ 
-							Validator.isRequired('#inputMaMay'),
-							Validator.isPattern('#inputMaMay',/^(M)[0-9]+$/,"Vui lòng nhập đúng format KHxxxxx"),
-							Validator.isLength('#inputMaMay',5),
-							//Validator.isRequired('#inputViTri'),
-							Validator.isRequired('#inputTrangThai'), 
+							Validator.isRequired('#maKH'),
+							Validator.isPattern('#maKH',/^(KH)[0-9]+$/,"Vui lòng nhập đúng format KHxxxxx"),
+							Validator.isLength('#maKH',7),
+							Validator.isRequired('#maDV'),
+							Validator.isPattern('#maDV',/^(DV)[0-9]+$/,"Vui lòng nhập đúng format DVxxxxx"),
+							Validator.isLength('#maDV',6),
+							Validator.isRequired('#ngaySuDung'), 
+							Validator.isRequired('#gioSuDung'),
+							Validator.isRequired('#soLuong'), 
+							Validator.isGreaterThanZero('#soLuong'), 
 						],
 			});
 		});

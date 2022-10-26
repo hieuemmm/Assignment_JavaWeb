@@ -13,9 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import fa.training.entites.KhachHang;
 import fa.training.repositories.CustomerRepository;
 
-@Service("customerService")
+@Service
 @Transactional
-public class CustomerService implements IGeneralService<KhachHang> {
+public class CustomerService implements IGeneralService<KhachHang,String> {
 	@Autowired
 	CustomerRepository customerRepository;
 
@@ -35,7 +35,7 @@ public class CustomerService implements IGeneralService<KhachHang> {
 	@Override
 	@Transactional
 	public List<KhachHang> findAllByKeyWord(String keyword) {
-		return customerRepository.findAllByKeyWord(keyword);
+		return customerRepository.findAllByKeyWord(keyword.trim());
 	}
 
 	@Override

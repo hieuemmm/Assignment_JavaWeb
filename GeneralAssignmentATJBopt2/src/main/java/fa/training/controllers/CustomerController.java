@@ -24,7 +24,7 @@ import fa.training.services.IGeneralService;
 @RequestMapping(value = "/customer")
 public class CustomerController {
 	@Autowired
-	IGeneralService<KhachHang> customerService;
+	IGeneralService<KhachHang, String> customerService;
 
 	@ModelAttribute("customer")
 	public KhachHang getCustomerObject() {

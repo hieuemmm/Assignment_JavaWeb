@@ -7,11 +7,11 @@ import org.springframework.data.domain.Pageable;
 
 import fa.training.entites.KhachHang;
 
-public interface IGeneralService<T> {
+public interface IGeneralService<T,K> {
 	List<T> findAll();
 	Page<T> findAll(int pageCurrent, int pageSize);
 	List<T> findAllByKeyWord(String keyword);
-	T findById(String id);
+	T findById(K id);
 	T save(T t);
-	boolean delete(String id);
+	boolean delete(K id);
 }

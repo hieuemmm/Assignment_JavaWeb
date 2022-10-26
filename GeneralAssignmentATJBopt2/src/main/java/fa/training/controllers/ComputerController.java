@@ -23,7 +23,7 @@ import fa.training.services.IGeneralService;
 @RequestMapping(value = "/computer")
 public class ComputerController {
 	@Autowired
-	IGeneralService<May> computerService;
+	IGeneralService<May, String> computerService;
 
 	@ModelAttribute("computer")
 	public May getComputerObject() {

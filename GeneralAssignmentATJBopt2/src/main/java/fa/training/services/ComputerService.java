@@ -13,9 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import fa.training.entites.May;
 import fa.training.repositories.ComputerRepository;
 
-@Service("computerService")
+@Service
 @Transactional
-public class ComputerService implements IGeneralService<May> {
+public class ComputerService implements IGeneralService<May,String> {
 	@Autowired
 	ComputerRepository computerRepository;
 
@@ -34,7 +34,7 @@ public class ComputerService implements IGeneralService<May> {
 	@Override
 	@Transactional
 	public List<May> findAllByKeyWord(String keyword) {
-		return computerRepository.findAllByKeyWord(keyword);
+		return computerRepository.findAllByKeyWord(keyword.trim());
 	}
 
 	@Override

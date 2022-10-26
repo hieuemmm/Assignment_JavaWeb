@@ -21,6 +21,13 @@ img {
 h1 {
     margin: 0;
 }
+.btn-search {
+	height:38px!important;
+	min-width:140px !important;
+}
+.nav-link:active{
+	color: red !important;
+}
 /* VALIDATION */
 .form-group .form-message {
     display: none;
@@ -42,3 +49,16 @@ form#form{
 	max-width: 500px;
 	margin:0 auto;
 }
+/*without_ampm*/
+.without_ampm::-webkit-datetime-edit-ampm-field {
+   display: none;
+ }
+ input[type=time]::-webkit-clear-button {
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   -o-appearance: none;
+   -ms-appearance:none;
+   appearance: none;
+   margin: -10px; 
+ }
+ 

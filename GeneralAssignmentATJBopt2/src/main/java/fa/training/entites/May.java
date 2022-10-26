@@ -16,7 +16,7 @@ public class May {
 	private String viTri;
 	@Column(columnDefinition = "nvarchar(255)")
 	private String trangThai;
-	@OneToMany(mappedBy = "maMay", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "maMay")
 	private List<SuDungMay> suDungMays;
 
 	public May() {

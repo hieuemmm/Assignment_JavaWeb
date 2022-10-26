@@ -23,6 +23,7 @@
 	integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
 	crossorigin="anonymous"></script>
 <title>CM | List Computer</title>
+<link rel="stylesheet" href="/GeneralAssignmentATJBopt2/resources/css/index.css">
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
@@ -31,7 +32,7 @@
 		<div class="d-flex justify-content-between my-2">
 			<h3>List computer</h3>
 			<a href="/GeneralAssignmentATJBopt2/computer/add">
-				<button class="btn btn-success">New computer</button>
+				<button class="btn btn-success btn-search">New computer</button>
 			</a>
 		</div>
 		<div class="d-flex justify-content-between mt-2">
@@ -40,7 +41,7 @@
 					<input type="text" class="form-control " id="inputSearch" name="search" placeholder="Enter keyword..." value="${search}"/> 
 					<span class="form-message"></span>
 				</div>
-				<button type="submit" class="btn btn-primary ml-auto" style="height:38px;width:130.65px;">Search</button>
+				<button type="submit" class="btn btn-primary ml-auto btn-search">Search</button>
 			</form>
 		</div>
 		<!--Báo thành công-->

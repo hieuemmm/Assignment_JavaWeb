@@ -22,8 +22,7 @@
 	integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
 	crossorigin="anonymous"></script>
 <title>CM | Edit Computer</title>
-<link rel="stylesheet"
-	href="/GeneralAssignmentATJBopt2/resources/css/index.css">
+<link rel="stylesheet" href="/GeneralAssignmentATJBopt2/resources/css/index.css">
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
@@ -96,9 +95,10 @@
 				form : '#form',
 				formGroupSelector : '.form-group',
 				errorSelector : '.form-message',
-				rules : [ Validator.isRequired('#inputMaMay'),
-						Validator.isRequired('#inputViTri'),
-						Validator.isRequired('#inputTrangThai'), ],
+				rules : [ 
+							//Validator.isRequired('#inputViTri'),
+							Validator.isRequired('#inputTrangThai'), 
+						],
 			});
 		});
 	</script>

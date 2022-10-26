@@ -163,6 +163,14 @@ Validator.isNumberPhone = function (selector, message) {
         }
     };
 }
+Validator.isGreaterThanZero = function (selector, message) {
+    return {
+        selector: selector,
+        test: function (value) {
+            return Number(value)>0 ? undefined : message || 'Trường này phải là số nguyên lớn hơn 0';
+        }
+    };
+}
 
 Validator.isPattern = function (selector, regex, message) {
     return {

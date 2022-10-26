@@ -22,8 +22,7 @@
 	integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
 	crossorigin="anonymous"></script>
 <title>CM | Add Customer</title>
-<link rel="stylesheet"
-	href="/GeneralAssignmentATJBopt2/resources/css/index.css">
+<link rel="stylesheet" href="/GeneralAssignmentATJBopt2/resources/css/index.css">
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
@@ -98,8 +97,8 @@
 				errorSelector : '.form-message',
 				rules : [ 
 							Validator.isRequired('#maKH'),
-							Validator.isPattern('#maKH',/^(KH)[0-9]+$/,"Vui lòng nhập KH__, trong đó __ là số"),
-							Validator.isLength('#maKH',6),
+							Validator.isPattern('#maKH',/^(KH)[0-9]+$/,"Vui lòng nhập đúng format KHxxxxx"),
+							Validator.isLength('#maKH',7),
 							//Validator.isRequired('#tenKH'),
 							//Validator.isRequired('#diaChi'), 
 							Validator.isRequired('#soDienThoai'), 

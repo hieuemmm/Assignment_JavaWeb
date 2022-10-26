@@ -21,51 +21,59 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
 	crossorigin="anonymous"></script>
-<title>CM | Add Computer</title>
+<title>CM | Edit Service</title>
 <link rel="stylesheet" href="/GeneralAssignmentATJBopt2/resources/css/index.css">
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
 	<div class="container mt-2">
+		<div class="d-flex justify-content-end my-2">
+			<a href="/GeneralAssignmentATJBopt2/service/" class="mr-2">
+				<button class="btn btn-dark">Back List Service</button>
+			</a>
+		</div>
 		<div class="d-flex justify-content-center my-2">
-			<h3>Add computer</h3>
+			<h3>Edit service</h3>
 		</div>
 		<form:form id="form" class="border p-4" method="POST"
-			action="/GeneralAssignmentATJBopt2/computer/saveAdd"
-			modelAttribute="computer">
-				<c:if test='${messageError != null}'>
-					<div class="form-group">
-						<div class="alert alert-danger" role="alert">
-						  ${messageError}
-						</div>
+			action="/GeneralAssignmentATJBopt2/service/saveEdit"
+			modelAttribute="service">
+			<c:if test='${messageError != null}'>
+				<div class="form-group">
+					<div class="alert alert-success" role="alert">
+					  ${messageError}
 					</div>
-				</c:if>
-				
+				</div>
+			</c:if>
+			<div class="form-group mb-0">
+				<label >Mã dịch vụ:</label> 
+				<strong>${service.maDV}</strong>
+				<form:hidden path="maDV" value="${service.maDV}"/>
+			</div>
 			<div class="form-group">
-				<label for="inputMaMay">Mã máy</label> 
-				<form:input type="text" class="form-control" id="inputMaMay" path="maMay" placeholder="Nhập mã máy..." value="${computer.maMay}"/> 
+				<label for="tenDV">Tên dịch vụ</label> 
+				<form:input type="text" class="form-control" id="tenDV" path="tenDV" placeholder="Nhập tên dịch vụ..." value="${service.tenDV}"/> 
 					<span class="form-message">Messeage...</span>
 			</div>
 			<div class="form-group">
-				<label for="inputViTri">Vị trí</label> 
-				<form:input type="text" class="form-control" id="inputViTri" path="viTri" placeholder="Nhập vị trí..." value="${computer.viTri}"/> 
+				<label for="donGia">Đơn giá</label> 
+				<form:input type="number" class="form-control" id="donGia" path="donGia" placeholder="Nhập đơn giá..." value="${service.donGia}"/> 
 					<span class="form-message">Messeage...</span>
 			</div>
 			<div class="form-group">
-				<label for="inputMaMay">Trạng thái</label> 
-				<form:select
-					class="custom-select" id="inputTrangThai" path="trangThai" value="${computer.trangThai}">
-					<form:option value="">--Không chọn--</form:option>
-					<form:option value="Dang ranh">Đang rảnh</form:option>
-					<form:option value="Dang dung">Đang dùng</form:option>
-					<form:option value="Dang sua chua">Đang sửa chữa</form:option>
-				</form:select> 
-				<span class="form-message">Messeage...</span>
+				<label for="donViTinh">Đơn vị tính</label> 
+				<form:input type="text" class="form-control" id="donViTinh" path="donViTinh" placeholder="Nhập đơn vị tính..." value="${service.donViTinh}"/> 
+					<span class="form-message">Messeage...</span>
+			</div>
+			<div class="form-group">
+				<label for="hinhAnh">Hình ảnh(URL)</label> 
+				<form:input type="text" class="form-control" id="hinhAnh" path="hinhAnh" placeholder="Nhập hình ảnh..." value="${service.hinhAnh}"/> 
+					<span class="form-message">Messeage...</span>
 			</div>
 			<div class="d-flex justify-content-end w-100">
-				<button type="reset" class="btn btn-outline-white border mr-auto">Clear</button>
-				<button type="submit" class="btn btn-primary mr-2">Create</button>
-				<a href="/GeneralAssignmentATJBopt2/customer/" class="mr-2">
+				<button type="button" class="btn btn-outline-white border mr-auto" onClick="location.reload()">Reload</button>
+				<button type="submit" class="btn btn-primary mr-2">Confirm</button>
+				<a href="/GeneralAssignmentATJBopt2/service/" class="mr-2">
 					<button type="button" class="btn btn-outline-white border">Back</button>
 				</a>
 			</div>
@@ -91,12 +99,12 @@
 				form : '#form',
 				formGroupSelector : '.form-group',
 				errorSelector : '.form-message',
-				rules : [ 
-							Validator.isRequired('#inputMaMay'),
-							Validator.isPattern('#inputMaMay',/^(M)[0-9]+$/,"Vui lòng nhập đúng format KHxxxxx"),
-							Validator.isLength('#inputMaMay',5),
-							//Validator.isRequired('#inputViTri'),
-							Validator.isRequired('#inputTrangThai'), 
+				rules : [  
+							//Validator.isRequired('#tenDV'),
+							Validator.isRequired('#donGia'), 
+							Validator.isGreaterThanZero('#donGia'),
+							Validator.isRequired('#donViTinh'),
+							//Validator.isRequired('#hinhAnh'), 
 						],
 			});
 		});

@@ -24,10 +24,10 @@ public class KhachHang {
 	private String soDienThoai;
 	private String diaChiEmail;
 
-	@OneToMany(mappedBy = "maKH", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "maKH")
 	private List<SuDungMay> suDungMays;
 
-	@OneToMany(mappedBy = "maKH", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "maKH")
 	private List<SuDungDichVu> suDungDichVus;
 
 	public KhachHang() {

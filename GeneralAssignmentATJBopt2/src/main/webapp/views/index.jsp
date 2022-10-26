@@ -22,33 +22,58 @@
 	integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
 	crossorigin="anonymous"></script>
 <title>CM | Home</title>
+<link rel="stylesheet" href="/GeneralAssignmentATJBopt2/resources/css/index.css">
 </head>
 <body>
 	<%@ include file="./header.jsp"%>
-	<div class="d-flex flex-column align-items-center">
-		<h3>Danh sách màn hình</h3>
-		<div class="list-group mt-3" style="width: 500px;">
-		  <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-		    Tạo mới computer
-		  </a>
-		  <a href="#" class="list-group-item list-group-item-action">A second link item</a>
-		  <a href="#" class="list-group-item list-group-item-action">A third link item</a>
-		  <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
-		  <a class="list-group-item list-group-item-action disabled">A disabled link item</a>
+	<div class="container-fuild" >
+		<div class="row" style="min-height:550px">
+			<div class="col-5 border-left">
+				<div class="d-flex flex-column align-items-center mt-2">
+					<h3 class="text-left w-100 ml-4">Using the services</h3>
+					<div class="list-group mt-3" style="width: 550px;">
+						<a href="/GeneralAssignmentATJBopt2/useService/add" class="list-group-item list-group-item-action">
+							<span>[REGITER] </span>⇒ <strong>To use the service</strong>
+						</a> 
+						<a href="/GeneralAssignmentATJBopt2/useService"class="list-group-item list-group-item-action">
+							<span>[GO TO] </span>⇒ <strong>Service registration history</strong>
+						</a>	
+					</div>
+				</div>
+				<div class="d-flex flex-column align-items-center mt-2">
+					<h3 class="text-left w-100 ml-4">Using the computers</h3>
+					<div class="list-group mt-3" style="width: 550px;">
+						<a href="/GeneralAssignmentATJBopt2/useComputer/add" class="list-group-item list-group-item-action">
+							<span>[REGITER] </span>⇒ <strong>To use the computer</strong>
+						</a> 
+						<a href="/GeneralAssignmentATJBopt2/useComputer"class="list-group-item list-group-item-action">
+							<span>[GO TO] </span>⇒ <strong>Computer registration history</strong>
+						</a>	
+					</div>
+				</div>
+				<div class="d-flex flex-column align-items-center mt-4">
+					<div class="list-group mt-3 " style="width: 550px;">
+						<a href="#" class="alert alert-success text-decoration-none"
+							aria-current="true">All the information</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-6 mt-2">
+				<img src="https://synnexfpt.com/wp-content/uploads/2022/07/FPT-Services-Banner-2.jpg" style="width:115%"/>
+			</div>
 		</div>
-	</div>
-	<%@ include file="./footer.jsp"%>
-	<script
-		src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
-		integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
-		crossorigin="anonymous"></script>
+		<%@ include file="./footer.jsp"%>
+		<script
+			src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+			integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+			integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
+			integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
+			crossorigin="anonymous"></script>
 </body>
 </html>
