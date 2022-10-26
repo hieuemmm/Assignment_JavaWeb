@@ -2,6 +2,7 @@ package fa.training.entites;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -16,7 +17,9 @@ import lombok.Setter;
 public class KhachHang {
 	@Id
 	private String maKH;
+	@Column(columnDefinition = "nvarchar(255)")
 	private String tenKH;
+	@Column(columnDefinition = "nvarchar(255)")
 	private String diaChi;
 	private String soDienThoai;
 	private String diaChiEmail;

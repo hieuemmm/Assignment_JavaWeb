@@ -34,13 +34,13 @@
 		<form:form id="form" class="border p-4" method="POST"
 			action="/GeneralAssignmentATJBopt2/customer/saveAdd"
 			modelAttribute="customer">
-				<c:if test='${messageError != null}'>
-					<div class="form-group">
-						<div class="alert alert-danger" role="alert">
-						  ${messageError}
-						</div>
+			<c:if test='${messageError != null}'>
+				<div class="form-group">
+					<div class="alert alert-danger" role="alert">
+					  ${messageError}
 					</div>
-				</c:if>
+				</div>
+			</c:if>
 				
 			<div class="form-group">
 				<label for="inputMaMay">Mã khách hàng</label> 
@@ -68,9 +68,10 @@
 					<span class="form-message">Messeage...</span>
 			</div>
 			<div class="d-flex justify-content-end w-100">
-				<button type="submit" class="btn btn-primary mr-2">Tạo mới</button>
+				<button type="reset" class="btn btn-outline-white border mr-auto">Clear</button>
+				<button type="submit" class="btn btn-primary mr-2">Create</button>
 				<a href="/GeneralAssignmentATJBopt2/customer/" class="mr-2">
-					<button type="button" class="btn btn-outline-white border">Quay lại</button>
+					<button type="button" class="btn btn-outline-white border">Back</button>
 				</a>
 			</div>
 		</form:form>
@@ -96,9 +97,15 @@
 				formGroupSelector : '.form-group',
 				errorSelector : '.form-message',
 				rules : [ 
-							Validator.isRequired('#inputMaMay'),
-							Validator.isRequired('#inputViTri'),
-							Validator.isRequired('#inputTrangThai'), 
+							Validator.isRequired('#maKH'),
+							Validator.isPattern('#maKH',/^(KH)[0-9]+$/,"Vui lòng nhập KH__, trong đó __ là số"),
+							Validator.isLength('#maKH',6),
+							//Validator.isRequired('#tenKH'),
+							//Validator.isRequired('#diaChi'), 
+							Validator.isRequired('#soDienThoai'), 
+							Validator.isNumberPhone('#soDienThoai'),
+							Validator.isRequired('#diaChiEmail'), 
+							Validator.isEmail('#diaChiEmail'), 
 						],
 			});
 		});

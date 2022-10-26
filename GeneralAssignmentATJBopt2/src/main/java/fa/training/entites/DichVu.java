@@ -2,6 +2,7 @@ package fa.training.entites;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -16,7 +17,9 @@ import lombok.Data;
 public class DichVu {
 	@Id
 	private String maDV;
+	@Column(columnDefinition = "nvarchar(255)")
 	private String tenDV;
+	@Column(columnDefinition = "nvarchar(255)")
 	private String donViTinh;
 	private double donGia;
 	

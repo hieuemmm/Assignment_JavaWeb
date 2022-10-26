@@ -47,11 +47,10 @@
 					</div>
 				</c:if>
 				
-			<div class="form-group">
+			<div class="form-group mb-0">
 				<label>Mã máy: </label> 
-				<span>${computer.maMay}</span>
-				<form:input type="text" class="form-control d-none" id="inputMaMay" path="maMay" placeholder="Nhập mã máy..." value="${computer.maMay}"/> 
-					<span class="form-message">Messeage...</span>
+				<strong>${computer.maMay}</strong>
+				<form:hidden path="maMay" value="${computer.maMay}"/>
 			</div>
 			<div class="form-group">
 				<label for="inputViTri">Vị trí</label> 
@@ -62,16 +61,17 @@
 				<label for="inputMaMay">Trạng thái</label> <form:select
 					class="custom-select" id="inputTrangThai" path="trangThai" value="${computer.trangThai}">
 					<form:option value="">--Không chọn--</form:option>
-					<form:option value="Dang dung">Dang dung</form:option>
-					<form:option value="Dang ranh">Dang ranh</form:option>
-					<form:option value="Dang sua chua">Dang sua chua</form:option>
+					<form:option value="Dang ranh">Đang rảnh</form:option>
+					<form:option value="Dang dung">Đang dùng</form:option>
+					<form:option value="Dang sua chua">Đang sửa chữa</form:option>
 				</form:select> 
 				<span class="form-message">Messeage...</span>
 			</div>
 			<div class="d-flex justify-content-end w-100">
-				<button type="submit" class="btn btn-primary mr-2">Xác nhận sửa</button>
+				<button type="button" class="btn btn-outline-white border mr-auto" onClick="location.reload()">Reload</button>
+				<button type="submit" class="btn btn-primary mr-2">Confirm</button>
 				<a href="/GeneralAssignmentATJBopt2/computer/" class="mr-2">
-					<button type="button" class="btn btn-outline-white border">Quay lại</button>
+					<button type="button" class="btn btn-outline-white border">Back</button>
 				</a>
 			</div>
 		</form:form>

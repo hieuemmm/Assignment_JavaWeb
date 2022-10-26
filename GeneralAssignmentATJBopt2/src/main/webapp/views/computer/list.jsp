@@ -37,10 +37,10 @@
 		<div class="d-flex justify-content-between mt-2">
 			<form id="formSearch" class="w-100 d-flex justify-content-between" method="GET" action="/GeneralAssignmentATJBopt2/computer/search">
 				<div class="form-group col pl-0 mb-0">
-					<input type="text" class="form-control " id="inputSearch" name="search" placeholder="Tìm kiếm..." value="${search}"/> 
+					<input type="text" class="form-control " id="inputSearch" name="search" placeholder="Enter keyword..." value="${search}"/> 
 					<span class="form-message"></span>
 				</div>
-				<button type="submit" class="btn btn-primary ml-auto" style="height:38px;width:130.65px;">Tìm kiếm</button>
+				<button type="submit" class="btn btn-primary ml-auto" style="height:38px;width:130.65px;">Search</button>
 			</form>
 		</div>
 		<!--Báo thành công-->

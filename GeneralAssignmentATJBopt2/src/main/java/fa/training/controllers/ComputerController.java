@@ -97,11 +97,11 @@ public class ComputerController {
 	}
 
 	@GetMapping(value = "/delete/{id}/{currentPage}")
-	public String delete(Model model, @PathVariable String id, @PathVariable int currentPage) {
-		System.out.println(id);
-		System.out.println(currentPage);
-		computerService.delete(id);
-		return listOfPage(model, currentPage);
+	public String delete(Model model, @PathVariable String id, @PathVariable int currentPage, RedirectAttributes attributes) {
+		if(computerService.delete(id)) {
+			attributes.addFlashAttribute("messageSuccess", "Xoá máy có maMay " + id + " thành công");
+		}
+		return "redirect:/computer/" + currentPage;
 	}
 
 	@GetMapping("/search")

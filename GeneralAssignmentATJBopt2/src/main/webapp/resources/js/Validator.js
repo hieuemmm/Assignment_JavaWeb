@@ -154,11 +154,30 @@ Validator.isEmail = function (selector, message) {
     };
 }
 
+Validator.isNumberPhone = function (selector, message) {
+    return {
+        selector: selector,
+        test: function (value) {
+            var regex = /^((090)|(091)|(\(84\)\+90)|(\(84\)\+91))[0-9]+$/;
+            return regex.test(value) ? undefined : message || 'Trường này phải bắt đầu bằng 090, 091, (84)+90 hoặc (84)+91';
+        }
+    };
+}
+
 Validator.isPattern = function (selector, regex, message) {
     return {
         selector: selector,
         test: function (value) {
             return regex.test(value) ? undefined : message || 'Trường này không hợp lệ';
+        }
+    };
+}
+
+Validator.isLength = function (selector, length, message) {
+    return {
+        selector: selector,
+        test: function (value) {
+            return value.length == length ? undefined : message || `Vui lòng nhập độ dài đúng bằng ${length} kí tự`;
         }
     };
 }

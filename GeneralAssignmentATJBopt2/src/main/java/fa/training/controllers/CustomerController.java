@@ -99,9 +99,11 @@ public class CustomerController {
 	}
 
 	@GetMapping(value = "/delete/{id}/{currentPage}")
-	public String delete(Model model, @PathVariable String id, @PathVariable int currentPage) {
-		customerService.delete(id);
-		return listOfPage(model, currentPage);
+	public String delete(Model model, @PathVariable String id, @PathVariable int currentPage, RedirectAttributes attributes) {
+		if(customerService.delete(id)) {
+			attributes.addFlashAttribute("messageSuccess", "Xoá khách hàng có maKH " + id + " thành công");
+		}
+		return "redirect:/customer/" + currentPage;
 	}
 
 	@GetMapping("/search")

@@ -21,7 +21,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
 	crossorigin="anonymous"></script>
-<title>CM | Edit Computer</title>
+<title>CM | Edit Customer</title>
 <link rel="stylesheet"
 	href="/GeneralAssignmentATJBopt2/resources/css/index.css">
 </head>
@@ -29,49 +29,53 @@
 	<%@ include file="../header.jsp"%>
 	<div class="container mt-2">
 		<div class="d-flex justify-content-end my-2">
-			<a href="/GeneralAssignmentATJBopt2/computer/" class="mr-2">
-				<button class="btn btn-dark">Back List Computer</button>
+			<a href="/GeneralAssignmentATJBopt2/customer/" class="mr-2">
+				<button class="btn btn-dark">Back List Customer</button>
 			</a>
 		</div>
 		<div class="d-flex justify-content-center my-2">
-			<h3>Edit computer</h3>
+			<h3>Edit customer</h3>
 		</div>
 		<form:form id="form" class="border p-4" method="POST"
-			action="/GeneralAssignmentATJBopt2/computer/saveEdit"
-			modelAttribute="computer">
-				<c:if test='${messageError != null}'>
-					<div class="form-group">
-						<div class="alert alert-success" role="alert">
-						  ${messageError}
-						</div>
+			action="/GeneralAssignmentATJBopt2/customer/saveEdit"
+			modelAttribute="customer">
+			<c:if test='${messageError != null}'>
+				<div class="form-group">
+					<div class="alert alert-success" role="alert">
+					  ${messageError}
 					</div>
-				</c:if>
-				
+				</div>
+			</c:if>
+			<div class="form-group mb-0">
+				<label >Mã khách hàng:</label> 
+				<strong>${customer.maKH}</strong>
+				<form:hidden path="maKH" value="${customer.maKH}"/>
+			</div>
 			<div class="form-group">
-				<label>Mã máy: </label> 
-				<span>${computer.maMay}</span>
-				<form:input type="text" class="form-control d-none" id="inputMaMay" path="maMay" placeholder="Nhập mã máy..." value="${computer.maMay}"/> 
+				<label for="inputViTri">Tên khách hàng</label> 
+				<form:input type="text" class="form-control" id="tenKH" path="tenKH" placeholder="Nhập tên khách hàng..." value="${customer.tenKH}"/> 
 					<span class="form-message">Messeage...</span>
 			</div>
 			<div class="form-group">
-				<label for="inputViTri">Vị trí</label> 
-				<form:input type="text" class="form-control" id="inputViTri" path="viTri" placeholder="Nhập vị trí..." value="${computer.viTri}"/> 
+				<label for="inputViTri">Địa chỉ</label> 
+				<form:input type="text" class="form-control" id="diaChi" path="diaChi" placeholder="Nhập địa chỉ..." value="${customer.diaChi}"/> 
 					<span class="form-message">Messeage...</span>
 			</div>
 			<div class="form-group">
-				<label for="inputMaMay">Trạng thái</label> <form:select
-					class="custom-select" id="inputTrangThai" path="trangThai" value="${computer.trangThai}">
-					<form:option value="">--Không chọn--</form:option>
-					<form:option value="Dang dung">Dang dung</form:option>
-					<form:option value="Dang ranh">Dang ranh</form:option>
-					<form:option value="Dang sua chua">Dang sua chua</form:option>
-				</form:select> 
-				<span class="form-message">Messeage...</span>
+				<label for="inputViTri">Số điện thoại</label> 
+				<form:input type="text" class="form-control" id="soDienThoai" path="soDienThoai" placeholder="Nhập số điện thoại..." value="${customer.soDienThoai}"/> 
+					<span class="form-message">Messeage...</span>
+			</div>
+			<div class="form-group">
+				<label for="inputViTri">Địa chỉ Email</label> 
+				<form:input type="text" class="form-control" id="diaChiEmail" path="diaChiEmail" placeholder="Nhập địa chỉ Email..." value="${customer.diaChiEmail}"/> 
+					<span class="form-message">Messeage...</span>
 			</div>
 			<div class="d-flex justify-content-end w-100">
-				<button type="submit" class="btn btn-primary mr-2">Xác nhận sửa</button>
-				<a href="/GeneralAssignmentATJBopt2/computer/" class="mr-2">
-					<button type="button" class="btn btn-outline-white border">Quay lại</button>
+				<button type="button" class="btn btn-outline-white border mr-auto" onClick="location.reload()">Reload</button>
+				<button type="submit" class="btn btn-primary mr-2">Confirm</button>
+				<a href="/GeneralAssignmentATJBopt2/customer/" class="mr-2">
+					<button type="button" class="btn btn-outline-white border">Back</button>
 				</a>
 			</div>
 		</form:form>
@@ -96,9 +100,12 @@
 				form : '#form',
 				formGroupSelector : '.form-group',
 				errorSelector : '.form-message',
-				rules : [ Validator.isRequired('#inputMaMay'),
-						Validator.isRequired('#inputViTri'),
-						Validator.isRequired('#inputTrangThai'), ],
+				rules : [  
+							Validator.isRequired('#soDienThoai'), 
+							Validator.isNumberPhone('#soDienThoai'),
+							Validator.isRequired('#diaChiEmail'), 
+							Validator.isEmail('#diaChiEmail'), 
+						],
 			});
 		});
 	</script>
