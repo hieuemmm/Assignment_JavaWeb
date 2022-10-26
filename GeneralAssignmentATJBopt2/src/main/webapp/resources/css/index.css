@@ -1,0 +1,44 @@
+@charset "ISO-8859-1";
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+h1 {
+    margin: 0;
+}
+/* VALIDATION */
+.form-group .form-message {
+    display: none;
+}
+
+.form-group.invalid .form-message {
+    display: inline-block;
+    color: #f33a58;
+}
+
+.form-group.invalid input {
+    border: 1px solid #f33a58;
+}
+
+.invalid .form-control:focus {
+    box-shadow: #f33a58 !important;
+}
+form#form{
+	max-width: 500px;
+	margin:0 auto;
+}

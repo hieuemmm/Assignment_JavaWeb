@@ -21,30 +21,36 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
 	crossorigin="anonymous"></script>
-<title>CM | Add Computer</title>
+<title>CM | Edit Computer</title>
 <link rel="stylesheet"
 	href="/GeneralAssignmentATJBopt2/resources/css/index.css">
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
 	<div class="container mt-2">
+		<div class="d-flex justify-content-end my-2">
+			<a href="/GeneralAssignmentATJBopt2/computer/" class="mr-2">
+				<button class="btn btn-dark">Back List Computer</button>
+			</a>
+		</div>
 		<div class="d-flex justify-content-center my-2">
-			<h3>Add computer</h3>
+			<h3>Edit computer</h3>
 		</div>
 		<form:form id="form" class="border p-4" method="POST"
-			action="/GeneralAssignmentATJBopt2/computer/saveAdd"
+			action="/GeneralAssignmentATJBopt2/computer/saveEdit"
 			modelAttribute="computer">
 				<c:if test='${messageError != null}'>
 					<div class="form-group">
-						<div class="alert alert-danger" role="alert">
+						<div class="alert alert-success" role="alert">
 						  ${messageError}
 						</div>
 					</div>
 				</c:if>
 				
 			<div class="form-group">
-				<label for="inputMaMay">Mã máy</label> 
-				<form:input type="text" class="form-control" id="inputMaMay" path="maMay" placeholder="Nhập mã máy..." value="${computer.maMay}"/> 
+				<label>Mã máy: </label> 
+				<span>${computer.maMay}</span>
+				<form:input type="text" class="form-control d-none" id="inputMaMay" path="maMay" placeholder="Nhập mã máy..." value="${computer.maMay}"/> 
 					<span class="form-message">Messeage...</span>
 			</div>
 			<div class="form-group">
@@ -63,7 +69,7 @@
 				<span class="form-message">Messeage...</span>
 			</div>
 			<div class="d-flex justify-content-end w-100">
-				<button type="submit" class="btn btn-primary mr-2">Tạo mới</button>
+				<button type="submit" class="btn btn-primary mr-2">Xác nhận sửa</button>
 				<a href="/GeneralAssignmentATJBopt2/computer/" class="mr-2">
 					<button type="button" class="btn btn-outline-white border">Quay lại</button>
 				</a>

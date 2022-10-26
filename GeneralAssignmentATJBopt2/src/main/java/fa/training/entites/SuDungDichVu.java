@@ -29,7 +29,7 @@ public class SuDungDichVu {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "maKH", insertable  = false, updatable  = false)
-	private KhacHang khacHang;
+	private KhachHang khacHang;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "maDV", insertable  = false, updatable  = false)

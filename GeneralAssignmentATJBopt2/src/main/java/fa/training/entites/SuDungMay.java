@@ -33,7 +33,7 @@ public class SuDungMay {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "maKH", insertable  = false, updatable  = false)
-	private KhacHang khachHang;
+	private KhachHang khachHang;
 	
 	private class IdClassSuDungMay implements Serializable {
 		private static final long serialVersionUID = 1L;
