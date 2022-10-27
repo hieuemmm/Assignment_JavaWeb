@@ -22,7 +22,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
 	crossorigin="anonymous"></script>
-<title>CM | List Customer</title>
+<title>CM | Computer registration history</title>
 <link rel="stylesheet" href="/GeneralAssignmentATJBopt2/resources/css/index.css">
 </head>
 <body>
@@ -30,15 +30,15 @@
 	<div class="container mt-2">
 		<!--Header of page-->
 		<div class="d-flex justify-content-between my-2">
-			<h3>List customer</h3>
-			<a href="/GeneralAssignmentATJBopt2/customer/add">
-				<button class="btn btn-success btn-search">New customer</button>
+			<h3>Computer registration history</h3>
+			<a href="/GeneralAssignmentATJBopt2/useComputer/add">
+				<button class="btn btn-success btn-search">Regiter computer</button>
 			</a>
 		</div>
 		<div class="d-flex justify-content-between mt-2">
-			<form id="formSearch" class="w-100 d-flex justify-content-between" method="GET" action="/GeneralAssignmentATJBopt2/customer/search">
+			<form id="formSearch" class="w-100 d-flex justify-content-between" method="GET" action="/GeneralAssignmentATJBopt2/useComputer/search">
 				<div class="form-group col pl-0 mb-0">
-					<input type="text" class="form-control " id="inputSearch" name="search" placeholder="Enter keyword..." value="${search}"/> 
+					<input type="text" class="form-control" id="inputSearch" name="search" placeholder="Enter keyword..." value="${search}"/> 
 					<span class="form-message"></span>
 				</div>
 				<button type="submit" class="btn btn-primary ml-auto btn-search">Search</button>
@@ -52,38 +52,32 @@
 				<tr>
 					<th scope="col">STT</th>
 					<th scope="col">Mã KH</th>
-					<th scope="col">Tên KH</th>
-					<th scope="col">Địa chỉ</th>
-					<th scope="col">Số điện thoại</th>
-					<th scope="col">Địa chỉ Email</th>
+					<th scope="col">Mã Máy</th>
+					<th scope="col">Ngày bắt đầu sử dụng</th>
+					<th scope="col">Giờ bắt đầu sử dụng</th>
+					<th scope="col">Thời gian sử dụng</th>
 					<th scope="col">Thao tác</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${customers}" var="customer" varStatus="var">
+				<c:forEach items="${useComputers}" var="useComputer" varStatus="var">
 					<tr>
 						<th scope="row">${var.count}</th>
-						<td>${customer.maKH}</td>
-						<td>${customer.tenKH}</td>
-						<td>${customer.diaChi}</td>
-						<td>${customer.soDienThoai}</td>
-						<td>${customer.diaChiEmail}</td>
-						<td class="d-flex align-items-center">
-							<a class="text-decoration-none" href="/GeneralAssignmentATJBopt2/customer/edit/${customer.maKH}">
+						<td>${useComputer.maKH}</td>
+						<td>${useComputer.maMay}</td>
+						<td>${useComputer.ngayBatDauSuDung}</td>
+						<td>${useComputer.gioBatDauSuDung}</td>
+						<td>${useComputer.thoiGianSuDung}</td>
+						<td >
+							<a class="text-decoration-none" href="/GeneralAssignmentATJBopt2/useComputer/edit/${useComputer.maKH}/${useComputer.maMay}/${useComputer.ngayBatDauSuDung}/${useComputer.gioBatDauSuDung}">
 								<i class="bi bi-pencil-square" style="font-size: 25px; color:blue"></i>
 							</a>
 							<i 
 								class="bi bi-trash3-fill" 
 								style="font-size: 25px;color:red"
-								dataURL="/GeneralAssignmentATJBopt2/customer/delete/${customer.maKH}/${currentPage}"
+								dataURL="/GeneralAssignmentATJBopt2/useComputer/delete/${useComputer.maKH}/${useComputer.maMay}/${useComputer.ngayBatDauSuDung}/${useComputer.gioBatDauSuDung}/${currentPage}"
 								onclick="deleteFunction(event)"
 							></i>
-							<button 
-								style="width: 100px;"
-								class="btn border btn-sm"
-								dataURL="/GeneralAssignmentATJBopt2/useService/add/${customer.maKH}"
-								onclick="CheckOut(event)"
-							>Regiter</button>
 						</td>
 					</tr>
 				</c:forEach>
@@ -97,7 +91,7 @@
 					<ul class="pagination">
 						<c:if test="${currentPage > 1}">
 							<li class="page-item">
-								<a class="page-link" href="/GeneralAssignmentATJBopt2/customer/${currentPage - 1}">Previous</a>
+								<a class="page-link" href="/GeneralAssignmentATJBopt2/useComputer/${currentPage - 1}">Previous</a>
 							</li>
 						</c:if>
 						<c:if test="${currentPage <= 1}">
@@ -108,18 +102,18 @@
 						<c:forEach begin="1" end="${totalPages}" var="i">
 							<c:if test="${currentPage == i}">
 								<li class="page-item active">
-									<a class="page-link" href="/GeneralAssignmentATJBopt2/customer/${i}">${i}</a>
+									<a class="page-link" href="/GeneralAssignmentATJBopt2/useComputer/${i}">${i}</a>
 								</li>
 							</c:if>
 							<c:if test="${currentPage != i}">
 								<li class="page-item">
-									<a class="page-link" href="/GeneralAssignmentATJBopt2/customer/${i}">${i}</a>
+									<a class="page-link" href="/GeneralAssignmentATJBopt2/useComputer/${i}">${i}</a>
 								</li>
 							</c:if>
 						</c:forEach>
 						<c:if test="${currentPage < totalPages}">
 							<li class="page-item">
-								<a class="page-link" href="/GeneralAssignmentATJBopt2/customer/${currentPage + 1}">Next</a>
+								<a class="page-link" href="/GeneralAssignmentATJBopt2/useComputer/${currentPage + 1}">Next</a>
 							</li>
 						</c:if>
 						<c:if test="${currentPage >= totalPages}">
@@ -151,10 +145,6 @@
 		  if(resultConfirm){
 			  window.location.href = event.target.getAttribute("dataURL");
 		  }
-		}
-
-		function CheckOut(event) {
-			window.location.href = event.target.getAttribute("dataURL");
 		}
 	</script>
 </body>

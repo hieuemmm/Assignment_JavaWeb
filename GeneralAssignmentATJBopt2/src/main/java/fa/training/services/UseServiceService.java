@@ -29,7 +29,10 @@ public class UseServiceService implements IGeneralService<SuDungDichVu,IdSuDungD
 	@Override
 	@Transactional
 	public Page<SuDungDichVu> findAll(int pageCurrent, int pageSize) {
-		Pageable pageable = PageRequest.of(pageCurrent - 1, pageSize, Sort.by("maDV").ascending());
+		Pageable pageable = PageRequest.of(pageCurrent - 1, 
+											pageSize, 
+											Sort.by("ngaySuDung").descending()
+											.and(Sort.by("gioSuDung").descending()));
 		return useServiceRepository.findAll(pageable);
 	}
 

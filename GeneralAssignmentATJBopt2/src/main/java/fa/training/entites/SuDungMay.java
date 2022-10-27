@@ -1,6 +1,7 @@
 package fa.training.entites;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -20,18 +21,23 @@ public class SuDungMay {
 	@Id
 	private String gioBatDauSuDung;
 	private int thoiGianSuDung;
+	@Column(nullable = false)
+	private boolean trangThaiThanhToan;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "maMay", insertable = false, updatable = false)
 	private May may;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "maKH", insertable = false, updatable = false)
 	private KhachHang khachHang;
 
 	public SuDungMay() {
 	}
 
+	public SuDungMay(String maMay) {
+		this.maMay = maMay;
+	}
 	public SuDungMay(String maKH, String maMay, String ngayBatDauSuDung, String gioBatDauSuDung, int thoiGianSuDung,
 			May may, KhachHang khachHang) {
 		super();
@@ -99,4 +105,13 @@ public class SuDungMay {
 	public void setKhachHang(KhachHang khachHang) {
 		this.khachHang = khachHang;
 	}
+
+	public boolean isTrangThaiThanhToan() {
+		return trangThaiThanhToan;
+	}
+
+	public void setTrangThaiThanhToan(boolean trangThaiThanhToan) {
+		this.trangThaiThanhToan = trangThaiThanhToan;
+	}
+
 }

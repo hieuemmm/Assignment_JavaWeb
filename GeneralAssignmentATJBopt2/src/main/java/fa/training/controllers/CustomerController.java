@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fa.training.entites.KhachHang;
 import fa.training.entites.May;
+import fa.training.entites.SuDungMay;
 import fa.training.services.CustomerService;
 import fa.training.services.IGeneralService;
 
@@ -57,7 +58,7 @@ public class CustomerController {
 	public String add(Model model) {
 		return "customer/add";
 	}
-
+	
 	@PostMapping(value = "/saveAdd")
 	public String saveAdd(@ModelAttribute(name = "customer") KhachHang newCustomer, RedirectAttributes attributes) {
 		Optional<KhachHang> customer = Optional.ofNullable(customerService.findById(newCustomer.getMaKH()));

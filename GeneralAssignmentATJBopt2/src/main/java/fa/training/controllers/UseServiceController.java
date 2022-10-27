@@ -62,7 +62,15 @@ public class UseServiceController {
 		model.addAttribute("services", serviceService.findAll());
 		return "useService/add";
 	}
-
+	
+	@GetMapping(value = "/add/{maKH}")
+	public String add2(Model model, @PathVariable String maKH) {
+		model.addAttribute("customers", customerService.findAll());
+		model.addAttribute("services", serviceService.findAll());
+		model.addAttribute("useService", new SuDungDichVu(maKH));
+		return "useService/add";
+	}
+	
 	@PostMapping(value = "/saveAdd")
 	public String saveAdd(@ModelAttribute(name = "useService") SuDungDichVu newUseService, RedirectAttributes attributes) {
 		IdSuDungDichVu idNewUseService = new IdSuDungDichVu(newUseService.getMaKH(),newUseService.getMaDV(),newUseService.getNgaySuDung(),newUseService.getGioSuDung());

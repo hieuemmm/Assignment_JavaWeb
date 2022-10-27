@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fa.training.entites.May;
+import fa.training.entites.SuDungMay;
 import fa.training.services.ComputerService;
 import fa.training.services.IGeneralService;
 
@@ -56,6 +57,20 @@ public class ComputerController {
 		return "computer/add";
 	}
 
+	@GetMapping(value = "/done/{maMay}")
+	public String done(Model model, @PathVariable String maMay, RedirectAttributes attributes) {
+		Optional<May> computer = Optional.ofNullable(computerService.findById(maMay));
+		if (computer.isPresent()) {
+			computer.get().setTrangThai("Dang ranh");
+			May computerSuccess = computerService.save(computer.get());
+			attributes.addFlashAttribute("messageSuccess", "Đã đánh dấu sửa thành công, chuyển về Đang rảnh");
+			attributes.addFlashAttribute("computer", computerSuccess);
+			return "redirect:/computer/1";
+		}
+		attributes.addFlashAttribute("messageError", "Id" + maMay + " không tìm thấy");
+		return "redirect:/computer/edit";
+	}
+	
 	@PostMapping(value = "/saveAdd")
 	public String saveAdd(@ModelAttribute(name = "computer") May newComputer, RedirectAttributes attributes) {
 		Optional<May> computer = Optional.ofNullable(computerService.findById(newComputer.getMaMay()));

@@ -21,17 +21,20 @@ public class SuDungDichVu {
 	private String gioSuDung;
 	private int soLuong;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "maKH", insertable = false, updatable = false)
 	private KhachHang khacHang;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "maDV", insertable = false, updatable = false)
 	private DichVu dichVu;
 
 	public SuDungDichVu() {
 	}
 
+	public SuDungDichVu(String maKH) {
+		this.maKH = maKH;
+	}
 	public SuDungDichVu(String maKH, String maDV, String ngaySuDung, String gioSuDung, int soLuong, KhachHang khacHang,
 			DichVu dichVu) {
 		super();

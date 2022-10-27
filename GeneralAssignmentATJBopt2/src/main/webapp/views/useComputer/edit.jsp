@@ -20,56 +20,50 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
-	crossorigin="anonymous"></script>	
-<title>CM | Register to use the service</title>
+	crossorigin="anonymous"></script>
+<title>CM | Edit useService</title>
 <link rel="stylesheet" href="/GeneralAssignmentATJBopt2/resources/css/index.css">
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
 	<div class="container mt-2">
+		<div class="d-flex justify-content-end my-2">
+			<a href="/GeneralAssignmentATJBopt2/useService/" class="mr-2">
+				<button class="btn btn-dark">Back List useService</button>
+			</a>
+		</div>
 		<div class="d-flex justify-content-center my-2">
-			<h3>Register to use the service</h3>
+			<h3>Edit useService</h3>
 		</div>
 		<form:form id="form" class="border p-4" method="POST"
-			action="/GeneralAssignmentATJBopt2/useService/saveAdd"
+			action="/GeneralAssignmentATJBopt2/useService/saveEdit"
 			modelAttribute="useService">
 			<c:if test='${messageError != null}'>
 				<div class="form-group">
-					<div class="alert alert-danger" role="alert">
+					<div class="alert alert-success" role="alert">
 					  ${messageError}
 					</div>
 				</div>
 			</c:if>
-				
-			<div class="form-group">
-				<label for="maKH">Mã khách hàng</label>  
-				<form:select class="custom-select" id="maKH" path="maKH" value="${useService.maKH}">
-					<form:option value="">--Không chọn--</form:option>
-					<c:forEach items="${customers}" var="customer">
-						<form:option value="${customer.maKH}">${customer.maKH} - ${customer.tenKH}</form:option>
-					</c:forEach>
-				</form:select> 
-				<span class="form-message">Messeage...</span>
+			<div class="form-group mb-0">
+				<label >Mã khách hàng:</label> 
+				<strong>${useService.maKH}</strong>
+				<form:hidden path="maKH" value="${useService.maKH}"/>
 			</div>
-			<div class="form-group">
-				<label for="maDV">Mã dịch vụ</label> 
-				<form:select class="custom-select" id="maDV" path="maDV" value="${useService.maDV}">
-					<form:option value="">--Không chọn--</form:option>
-					<c:forEach items="${services}" var="service">
-						<form:option value="${service.maDV}">${service.maDV} - ${service.tenDV}</form:option>
-					</c:forEach>
-				</form:select> 
-				<span class="form-message">Messeage...</span>
+			<div class="form-group mb-0">
+				<label >Mã dịch vụ:</label> 
+				<strong>${useService.maDV}</strong>
+				<form:hidden path="maDV" value="${useService.maDV}"/>
 			</div>
-			<div class="form-group">
-				<label for="ngaySuDung">Ngày sử dụng</label> 
-				<form:input type="date" class="form-control" id="ngaySuDung" path="ngaySuDung" value="${useService.ngaySuDung}"/> 
-				<span class="form-message">Messeage...</span>
+			<div class="form-group mb-0">
+				<label >Ngày sử dụng:</label> 
+				<strong>${useService.ngaySuDung}</strong>
+				<form:hidden path="ngaySuDung" value="${useService.ngaySuDung}"/>
 			</div>
-			<div class="form-group">
-				<label for="gioSuDung">Thời gian sử dụng</label> 
-				<form:input type="time" class="form-control without_ampm" id="gioSuDung" path="gioSuDung" value="${useService.gioSuDung}"/> 
-				<span class="form-message">Messeage...</span>
+			<div class="form-group mb-0">
+				<label >Thời gian sử dụng:</label> 
+				<strong>${useService.gioSuDung}</strong>
+				<form:hidden path="gioSuDung" value="${useService.gioSuDung}"/>
 			</div>
 			<div class="form-group">
 				<label for="soLuong">Số lượng</label> 
@@ -77,8 +71,8 @@
 				<span class="form-message">Messeage...</span>
 			</div>
 			<div class="d-flex justify-content-end w-100">
-				<button type="reset" class="btn btn-outline-white border mr-auto">Clear</button>
-				<button type="submit" class="btn btn-primary mr-2">Create</button>
+				<button type="button" class="btn btn-outline-white border mr-auto" onClick="location.reload()">Reload</button>
+				<button type="submit" class="btn btn-primary mr-2">Confirm</button>
 				<a href="/GeneralAssignmentATJBopt2/useService/" class="mr-2">
 					<button type="button" class="btn btn-outline-white border">Back</button>
 				</a>
@@ -101,25 +95,11 @@
 	<script src="/GeneralAssignmentATJBopt2/resources/js/Validator.js"></script>
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
-			var currentDate = new Date().toISOString().split("T")[0];
-			var currentTime = new Date().toISOString().substring(11,16);
-			document.getElementById("ngaySuDung").value = currentDate;
-			document.getElementById("ngaySuDung").setAttribute("max",currentDate);
-			document.getElementById("gioSuDung").value = currentTime;
-			
 			Validator({
 				form : '#form',
 				formGroupSelector : '.form-group',
 				errorSelector : '.form-message',
-				rules : [ 
-							Validator.isRequired('#maKH'),
-							Validator.isPattern('#maKH',/^(KH)[0-9]+$/,"Vui lòng nhập đúng format KHxxxxx"),
-							Validator.isLength('#maKH',7),
-							Validator.isRequired('#maDV'),
-							Validator.isPattern('#maDV',/^(DV)[0-9]+$/,"Vui lòng nhập đúng format DVxxxxx"),
-							Validator.isLength('#maDV',6),
-							Validator.isRequired('#ngaySuDung'), 
-							Validator.isRequired('#gioSuDung'),
+				rules : [  
 							Validator.isRequired('#soLuong'), 
 							Validator.isGreaterThanZero('#soLuong'), 
 						],

@@ -61,9 +61,13 @@
 				<c:forEach items="${computers}" var="computer" varStatus="var">
 					<tr>
 						<th scope="row">${var.count}</th>
-						<td>${computer.maMay}</td>
+						<td title="Vị trí: ${computer.viTri}">
+							<span class="computer">${computer.maMay}<span>
+						</td>
 						<td>${computer.viTri}</td>
-						<td>${computer.trangThai}</td>
+						<td data-status="${computer.trangThai}" class="d-flex justify-content-start">
+							(<i class="bi bi-circle-fill"></i>)   ${computer.trangThai}
+						</td>
 						<td >
 							<a class="text-decoration-none" href="/GeneralAssignmentATJBopt2/computer/edit/${computer.maMay}">
 								<i class="bi bi-pencil-square" style="font-size: 25px; color:blue"></i>
@@ -74,6 +78,22 @@
 								dataURL="/GeneralAssignmentATJBopt2/computer/delete/${computer.maMay}/${currentPage}"
 								onclick="deleteFunction(event)"
 							></i>
+							<c:if test='${computer.trangThai.equals("Dang ranh")}'>
+								<button 
+									style="width: 100px;"
+									class="btn border btn-sm"
+									dataURL="/GeneralAssignmentATJBopt2/useComputer/add/${computer.maMay}"
+									onclick="CheckOut(event)"
+								>Regiter</button>
+							</c:if>
+							<c:if test='${computer.trangThai.equals("Dang sua chua")}'>
+								<button 
+									style="width: 100px;"
+									class="btn border btn-sm"
+									dataURL="/GeneralAssignmentATJBopt2/computer/done/${computer.maMay}"
+									onclick="CheckOut(event)"
+								>Mark Done</button>
+							</c:if>
 						</td>
 					</tr>
 				</c:forEach>
@@ -141,6 +161,10 @@
 		  if(resultConfirm){
 			  window.location.href = event.target.getAttribute("dataURL");
 		  }
+		}
+
+		function CheckOut(event) {
+			window.location.href = event.target.getAttribute("dataURL");
 		}
 	</script>
 </body>

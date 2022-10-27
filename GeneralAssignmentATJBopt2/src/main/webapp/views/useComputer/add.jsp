@@ -17,22 +17,23 @@
 	src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
 	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 	crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
 	crossorigin="anonymous"></script>	
-<title>CM | Register to use the service</title>
+<title>CM | Register to use the computer</title>
 <link rel="stylesheet" href="/GeneralAssignmentATJBopt2/resources/css/index.css">
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
 	<div class="container mt-2">
 		<div class="d-flex justify-content-center my-2">
-			<h3>Register to use the service</h3>
+			<h3>Register to use the computer</h3>
 		</div>
 		<form:form id="form" class="border p-4" method="POST"
-			action="/GeneralAssignmentATJBopt2/useService/saveAdd"
-			modelAttribute="useService">
+			action="/GeneralAssignmentATJBopt2/useComputer/saveAdd"
+			modelAttribute="useComputer">
 			<c:if test='${messageError != null}'>
 				<div class="form-group">
 					<div class="alert alert-danger" role="alert">
@@ -43,7 +44,7 @@
 				
 			<div class="form-group">
 				<label for="maKH">Mã khách hàng</label>  
-				<form:select class="custom-select" id="maKH" path="maKH" value="${useService.maKH}">
+				<form:select class="custom-select" id="maKH" path="maKH" value="${useComputer.maKH}">
 					<form:option value="">--Không chọn--</form:option>
 					<c:forEach items="${customers}" var="customer">
 						<form:option value="${customer.maKH}">${customer.maKH} - ${customer.tenKH}</form:option>
@@ -52,34 +53,36 @@
 				<span class="form-message">Messeage...</span>
 			</div>
 			<div class="form-group">
-				<label for="maDV">Mã dịch vụ</label> 
-				<form:select class="custom-select" id="maDV" path="maDV" value="${useService.maDV}">
+				<label for="maMay" data-status="Dang ranh">Mã máy (<i class="bi bi-circle-fill"></i>)</label> 
+				<form:select class="custom-select" id="maMay" path="maMay" value="${useComputer.maMay}">
 					<form:option value="">--Không chọn--</form:option>
-					<c:forEach items="${services}" var="service">
-						<form:option value="${service.maDV}">${service.maDV} - ${service.tenDV}</form:option>
+					<c:forEach items="${computers}" var="computer">
+					<c:if test="${computer.trangThai == 'Dang ranh'}">
+						<form:option value="${computer.maMay}">${computer.maMay} - ${computer.viTri}</form:option>
+					</c:if>
 					</c:forEach>
 				</form:select> 
 				<span class="form-message">Messeage...</span>
 			</div>
 			<div class="form-group">
-				<label for="ngaySuDung">Ngày sử dụng</label> 
-				<form:input type="date" class="form-control" id="ngaySuDung" path="ngaySuDung" value="${useService.ngaySuDung}"/> 
+				<label for="ngayBatDauSuDung">Ngày bắt đầu sử dụng</label> 
+				<form:input type="date" class="form-control" id="ngayBatDauSuDung" path="ngayBatDauSuDung" value="${useComputer.ngayBatDauSuDung}"/> 
 				<span class="form-message">Messeage...</span>
 			</div>
 			<div class="form-group">
-				<label for="gioSuDung">Thời gian sử dụng</label> 
-				<form:input type="time" class="form-control without_ampm" id="gioSuDung" path="gioSuDung" value="${useService.gioSuDung}"/> 
+				<label for="gioBatDauSuDung">Giờ sử dụng</label> 
+				<form:input type="time" class="form-control without_ampm" id="gioBatDauSuDung" path="gioBatDauSuDung" value="${useComputer.gioBatDauSuDung}"/> 
 				<span class="form-message">Messeage...</span>
 			</div>
 			<div class="form-group">
-				<label for="soLuong">Số lượng</label> 
-				<form:input type="number" class="form-control" id="soLuong" path="soLuong" placeholder="Nhập số lượng..." value="${useService.soLuong}"/> 
+				<label for="thoiGianSuDung">Thời gian sử dụng</label> 
+				<form:input type="number" class="form-control" id="thoiGianSuDung" path="thoiGianSuDung" placeholder="Nhập thời gian sử dụng..." value="${useComputer.thoiGianSuDung}"/> 
 				<span class="form-message">Messeage...</span>
 			</div>
 			<div class="d-flex justify-content-end w-100">
 				<button type="reset" class="btn btn-outline-white border mr-auto">Clear</button>
 				<button type="submit" class="btn btn-primary mr-2">Create</button>
-				<a href="/GeneralAssignmentATJBopt2/useService/" class="mr-2">
+				<a href="/GeneralAssignmentATJBopt2/useComputer/" class="mr-2">
 					<button type="button" class="btn btn-outline-white border">Back</button>
 				</a>
 			</div>
@@ -103,9 +106,9 @@
 		document.addEventListener('DOMContentLoaded', function() {
 			var currentDate = new Date().toISOString().split("T")[0];
 			var currentTime = new Date().toISOString().substring(11,16);
-			document.getElementById("ngaySuDung").value = currentDate;
-			document.getElementById("ngaySuDung").setAttribute("max",currentDate);
-			document.getElementById("gioSuDung").value = currentTime;
+			document.getElementById("ngayBatDauSuDung").value = currentDate;
+			document.getElementById("ngayBatDauSuDung").setAttribute("max",currentDate);
+			document.getElementById("gioBatDauSuDung").value = currentTime;
 			
 			Validator({
 				form : '#form',
@@ -115,13 +118,13 @@
 							Validator.isRequired('#maKH'),
 							Validator.isPattern('#maKH',/^(KH)[0-9]+$/,"Vui lòng nhập đúng format KHxxxxx"),
 							Validator.isLength('#maKH',7),
-							Validator.isRequired('#maDV'),
-							Validator.isPattern('#maDV',/^(DV)[0-9]+$/,"Vui lòng nhập đúng format DVxxxxx"),
-							Validator.isLength('#maDV',6),
-							Validator.isRequired('#ngaySuDung'), 
-							Validator.isRequired('#gioSuDung'),
-							Validator.isRequired('#soLuong'), 
-							Validator.isGreaterThanZero('#soLuong'), 
+							Validator.isRequired('#maMay'),
+							Validator.isPattern('#maMay',/^(M)[0-9]+$/,"Vui lòng nhập đúng format Mxxxx"),
+							Validator.isLength('#maMay',5),
+							Validator.isRequired('#ngayBatDauSuDung'), 
+							Validator.isRequired('#gioBatDauSuDung'),
+							Validator.isRequired('#thoiGianSuDung'), 
+							Validator.isGreaterThanZero('#thoiGianSuDung'), 
 						],
 			});
 		});

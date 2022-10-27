@@ -1,64 +1,108 @@
 @charset "ISO-8859-1";
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    outline: none;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	outline: none;
 }
 
 li {
-    list-style: none;
+	list-style: none;
 }
 
 a {
-    text-decoration: none;
+	text-decoration: none;
 }
 
 img {
-    max-width: 100%;
+	max-width: 100%;
 }
 
 h1 {
-    margin: 0;
+	margin: 0;
 }
+
 .btn-search {
-	height:38px!important;
-	min-width:140px !important;
+	height: 38px !important;
+	min-width: 150px !important;
 }
-.nav-link:active{
+
+.nav-link:active {
 	color: red !important;
 }
 /* VALIDATION */
 .form-group .form-message {
-    display: none;
+	display: none;
 }
 
 .form-group.invalid .form-message {
-    display: inline-block;
-    color: #f33a58;
+	display: inline-block;
+	color: #f33a58;
 }
 
 .form-group.invalid input {
-    border: 1px solid #f33a58;
+	border: 1px solid #f33a58;
 }
 
 .invalid .form-control:focus {
-    box-shadow: #f33a58 !important;
+	box-shadow: #f33a58 !important;
 }
-form#form{
+
+form#form {
 	max-width: 500px;
-	margin:0 auto;
+	margin: 0 auto;
 }
 /*without_ampm*/
 .without_ampm::-webkit-datetime-edit-ampm-field {
-   display: none;
- }
- input[type=time]::-webkit-clear-button {
-   -webkit-appearance: none;
-   -moz-appearance: none;
-   -o-appearance: none;
-   -ms-appearance:none;
-   appearance: none;
-   margin: -10px; 
- }
- 
+	display: none;
+}
+
+input[type=time]::-webkit-clear-button {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-o-appearance: none;
+	-ms-appearance: none;
+	appearance: none;
+	margin: -10px;
+}
+
+.table td[data-status] {
+	display: flex;
+	justify-content: center;
+}
+
+.table td[title] span {
+	cursor: pointer;
+}
+
+.table td[title] span.computer {
+	border: 1px solid #dee2e6;
+	border-radius: 5px;
+	padding: 5px;
+	background-color: #776e6e;
+	color: #fff;
+}
+
+.table td[title] span:hover {
+	color: blue !important;
+}
+
+[data-status="Dang ranh"]>i {
+	color: green !important;
+}
+
+[data-status="Dang dung"]>i {
+	color: red !important;
+}
+
+[data-status="Dang sua chua"]>i {
+	color: orange !important;
+}
+a {
+	text-decoration: none !important;
+}
+.btn.border.btn-sm.active{
+	background-color: #333 !important;
+	color: #fff !important;
+}
