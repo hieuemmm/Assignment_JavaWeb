@@ -5,7 +5,7 @@ import java.util.List;
 import fa.training.entities.Content;
 
 public interface IContentService {
-	List<Content> findAll();
+	List<Content> findAllByUser(String userName);
 
-	boolean saveContent(Content content1);
+	boolean saveContent(Content content);
 }

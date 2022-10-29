@@ -18,18 +18,27 @@
 	<section class="w-100 h-100vh container-fluid d-flex align-items-center">
 		<form id="form-login" class="form center" action="/JWEB_PA101/login?action=login" method="post">
 			<div class="form-title">Please Sign in</div>
-			<c:if test="${mess != null }">
-				<p style="color: red">${mess}</p>
-			</c:if>
 			<div class="form-body">
+			
+				<div style="color: green" class="my-2">${messageSuccessRegiter}</div>
+		
 				<div class="form-group">
 					<input id="inputEmail" 
-					value="${name}"
-					class="form-control h-45" name="email" type="text" placeholder="E-mail" maxlength="50">
+						class="form-control h-45" 
+						name="user_name" 
+						value="${user_name}"
+						type="text" 
+						placeholder="UserName" 
+						maxlength="50">
 					<span class="form-message"></span>
 				</div>
 				<div class="form-group">
-					<input id="inputPassword" name="password" type="password" class="form-control h-45" placeholder="PassWord"
+					<input id="inputPassword" 
+						name="password" 
+						type="password" 
+						value="${password}"
+						class="form-control h-45" 
+						placeholder="PassWord"
 						maxlength="50">
 					<span class="form-message"></span>
 				</div>
@@ -38,7 +47,7 @@
 				</c:if>
 				<div class="form-group">
 					<div class="form-check d-flex align-items-center">
-						<input type="checkbox" class="form-check-input" id="checkRememberme">
+						<input type="checkbox" class="form-check-input" id="checkRememberme" checked>
 						<label class="ml-2 form-check-label" for="checkRememberme">Remember me</label>
 					</div>
 				</div>

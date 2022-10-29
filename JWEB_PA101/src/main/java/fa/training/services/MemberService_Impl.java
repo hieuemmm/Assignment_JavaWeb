@@ -10,10 +10,14 @@ public class MemberService_Impl implements IMemberService {
 
 	@Override
 	public boolean login(String username, String password) {
+		username = username.trim();
+		password = password.trim();
 		if (!username.equals("") && !password.equals("")) {
 			Member member = memberRepository.findByUserName(username);
-			if (member.getUserName().equals(username) && member.getPassWork().equals(password)) {
-				return true;
+			if(member != null) {
+				if (member.getUserName().equals(username) && member.getPassWord().equals(password)) {
+					return true;
+				}
 			}
 		}
 		return false;
@@ -26,14 +30,11 @@ public class MemberService_Impl implements IMemberService {
 
 	@Override
 	public boolean saveRegister(Member member) {
-		if (memberRepository.saveRegister(member)) {
-			return true;
-		}
-		return false;
+		return memberRepository.saveRegister(member);
 	}
 
 	@Override
-	public boolean save(Member member) {
-		return memberRepository.save(member);
+	public boolean saveEdit(Member member) {
+		return memberRepository.saveEdit(member);
 	}
 }

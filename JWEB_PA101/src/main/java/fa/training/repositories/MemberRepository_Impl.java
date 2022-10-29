@@ -14,8 +14,8 @@ public class MemberRepository_Impl implements IMemberRepository {
 
 	DBconnection dBconnection = new DBconnection();
 	private final String SELECT_BY_MEMBER = "SELECT * from member where member.user_name = ?;";
-	private final String INSERT_INTO_MEMBER_REGISTER = "insert into member(user_name,password,email) values(?,?,?);";
-	private final String UPDATE_MEMBER = "update member set first_name=?, last_name=? ,phone=? ,email=? ,description=? ,created_date=? ,update_time=? where id_member=?;";
+	private final String INSERT_INTO_MEMBER_REGISTER = "INSERT INTO member(user_name, password, email, created_date) VALUES(?,?,?,?);";
+	private final String UPDATE_MEMBER = "UPDATE member SET first_name=?, last_name=? ,phone=?, description=? , update_time=? WHERE user_name=?;";
 
 	@Override
 	public Member findByUserName(String username) {
@@ -30,17 +30,16 @@ public class MemberRepository_Impl implements IMemberRepository {
 			preparedStatement.setString(1, username.trim());
 			resultSet = preparedStatement.executeQuery();
 			while(resultSet.next()) {
-				int memberId = resultSet.getInt("id_member");
 				String firstName = resultSet.getString("first_name");
 				String lastName = resultSet.getString("last_name");
 				String userName = resultSet.getString("user_name");
-				String passWork = resultSet.getString("password");
+				String passWord = resultSet.getString("password");
 				String phone = resultSet.getString("phone");
 				String email = resultSet.getString("email");
 				String description = resultSet.getString("description");
-				String createdDate = String.valueOf(resultSet.getDate("created_date"));
+				String createdDate = resultSet.getString("created_date");
 				String updateTime = resultSet.getString("update_time");
-				member = new Member(memberId, firstName, lastName, userName, passWork, phone, email, description, createdDate, updateTime);
+				member = new Member(firstName, lastName, userName, passWord, phone, email, description, createdDate, updateTime);
 			}
         } catch (IOException e) {
             e.printStackTrace();
@@ -78,8 +77,9 @@ public class MemberRepository_Impl implements IMemberRepository {
         	preparedStatement = connection.prepareStatement(INSERT_INTO_MEMBER_REGISTER);
 
 			preparedStatement.setString(1, member.getUserName());
-			preparedStatement.setString(2, member.getPassWork());
+			preparedStatement.setString(2, member.getPassWord());
 			preparedStatement.setString(3, member.getEmail());
+			preparedStatement.setString(4, member.getCreatedDate());
 			check = preparedStatement.executeUpdate() > 0;
         } catch (IOException e) {
             e.printStackTrace();
@@ -103,7 +103,7 @@ public class MemberRepository_Impl implements IMemberRepository {
 	}
 
 	@Override
-	public boolean save(Member member) {
+	public boolean saveEdit(Member member) {
         boolean check = false;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -114,11 +114,9 @@ public class MemberRepository_Impl implements IMemberRepository {
             preparedStatement.setString(1, member.getFirstName());
 			preparedStatement.setString(2, member.getLastName());
 			preparedStatement.setString(3, member.getPhone());
-			preparedStatement.setString(4, member.getEmail());
-			preparedStatement.setString(5, member.getDescription());
-			preparedStatement.setDate(6, Date.valueOf((member.getCreatedDate())));
-			preparedStatement.setString(7, member.getUpdateTime());
-			preparedStatement.setInt(8, member.getMemberId());
+			preparedStatement.setString(4, member.getDescription());
+			preparedStatement.setString(5, member.getUpdateTime());
+			preparedStatement.setString(6, member.getUserName());
 			
 			check = preparedStatement.executeUpdate() > 0;
         } catch (IOException e) {

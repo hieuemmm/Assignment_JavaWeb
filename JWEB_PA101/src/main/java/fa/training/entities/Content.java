@@ -7,9 +7,17 @@ public class Content {
 	private String content;
 	private String createdDate;
 	private String updateTime;
-	private int authorID;
+	private String useName;
 	
 	public Content() {
+	}
+	
+	public Content(String title, String brief, String content,String createdDate) {
+		super();
+		this.title = title;
+		this.brief = brief;
+		this.content = content;
+		this.createdDate = createdDate;
 	}
 	
 	public Content(String title, String brief, String content,String createdDate,String updateTime) {
@@ -20,9 +28,10 @@ public class Content {
 		this.createdDate = createdDate;
 		this.updateTime = updateTime;
 	}
+	
 
 	public Content(int contentID, String title, String brief, String content, String createdDate, String updateTime,
-			int authorID) {
+			String useName) {
 		super();
 		this.contentID = contentID;
 		this.title = title;
@@ -30,8 +39,9 @@ public class Content {
 		this.content = content;
 		this.createdDate = createdDate;
 		this.updateTime = updateTime;
-		this.authorID = authorID;
+		this.useName = useName;
 	}
+
 	public int getContentID() {
 		return contentID;
 	}
@@ -68,11 +78,12 @@ public class Content {
 	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
 	}
-	public int getAuthorID() {
-		return authorID;
+
+	public String getUseName() {
+		return useName;
 	}
-	public void setAuthorID(int authorID) {
-		this.authorID = authorID;
+
+	public void setUseName(String user_name) {
+		this.useName = user_name;
 	}
-	
 }

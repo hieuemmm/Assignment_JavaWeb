@@ -27,26 +27,44 @@
 			<div class="form-title">Register</div>
 			<div class="form-body">
 				<div class="form-group">
-					<input id="inputUserName" class="form-control h-45"
-					value="${user_name}"
-						name="user_name" type="text" placeholder="User name"
-						maxlength="50"> <span class="form-message"></span>
+					<input id="inputUserName" 
+						class="form-control h-45"
+						value="${user_name}"
+						name="user_name" type="text" 
+						placeholder="User name"
+						maxlength="50"> 
+					<span class="form-message"></span>
+					<span class="server-message">${messageErorUserName}</span>
 				</div>
 				<div class="form-group">
-					<input id="inputEmail" class="form-control h-45" name="email"
+					<input id="inputEmail" 
+						class="form-control h-45" 
+						name="email"
 						value="${email}"
-						type="email" placeholder="E-mail" maxlength="50"> <span
-						class="form-message"></span>
+						type="email" 
+						placeholder="E-mail" 
+						maxlength="50"> 
+					<span class="form-message"></span>
 				</div>
 				<div class="form-group">
-					<input id="inputPassword" name="password"
-						class="form-control h-45" type="password" placeholder="PassWord"
-						maxlength="50"> <span class="form-message"></span>
+					<input id="inputPassword" 
+						name="password"
+						value="${password}"
+						class="form-control h-45" 
+						type="password" 
+						placeholder="PassWord"
+						maxlength="50"> 
+					<span class="form-message"></span>
 				</div>
 				<div class="form-group">
-					<input id="inputRepassword" name="rePassword"
-						class="form-control h-45" type="password"
-						placeholder="Re PassWord"> <span class="form-message"></span>
+					<input id="inputRepassword" 
+						name="rePassword"
+						value="${rePassword}"
+						class="form-control h-45" 
+						type="password"
+						placeholder="Re PassWord"> 
+					<span class="form-message"></span>
+					<span class="server-message">${messageErorPasswordIncorrect}</span>
 				</div>
 				<div class="form-group">
 					<button type="submit" class="btn btn-block h-45">Register</button>
@@ -98,7 +116,7 @@
                     Validator.maxLength('#inputRepassword', 30),
                     Validator.isConfirmed('#inputRepassword', () => {
                         return document.querySelector('#form-register #inputPassword').value;
-                    }, 'Mật khẩu không khớp')
+                    }, 'Password Incorrect')
                 ],
             });
         });

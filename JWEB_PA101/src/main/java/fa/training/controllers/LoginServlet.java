@@ -17,6 +17,7 @@ import fa.training.services.IContentService;
 import fa.training.services.ContentService_Impl;
 import fa.training.services.IMemberService;
 import fa.training.services.MemberService_Impl;
+import fa.training.utils.DateUtil;
 
 @WebServlet(name = "LoginServlet", urlPatterns = { "/login" })
 public class LoginServlet extends HttpServlet {
@@ -79,52 +80,44 @@ public class LoginServlet extends HttpServlet {
 	}
 	
 	private void postRegister(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("views/register.jsp");
 		String userName = request.getParameter("user_name");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String rePassword = request.getParameter("rePassword");
+		request.setAttribute("user_name", userName);
+		request.setAttribute("email", email);
+		request.setAttribute("password", password);
+		request.setAttribute("rePassword", rePassword);
 		if (!password.equals(rePassword)) {
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("views/register.jsp");
-			request.setAttribute("mess", "Password incorrect");
-			request.setAttribute("user_name", userName);
-			request.setAttribute("email", email);
+			request.setAttribute("messageErorPasswordIncorrect", "Password incorrect");
 			requestDispatcher.forward(request, response);
 		} else {
-			Member member = new Member(userName, password, email);
-			System.out.println("userName"+userName);
-			System.out.println("password"+password);
-			System.out.println("email"+email);
-			boolean check = memberService.saveRegister(member);
-			if (check) {
-				request.setAttribute("mess", "Registration Success");
+			Member member = new Member(userName, email, password, DateUtil.getDateTime());
+			if (memberService.saveRegister(member)) {
+				request.setAttribute("messageSuccessRegiter", "Registration success");
+				request.getRequestDispatcher("views/login.jsp").forward(request, response);
 			} else {
-				request.setAttribute("mess", "Registration failed");
-			}
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("views/login.jsp");
-			try {
+				request.setAttribute("messageErorUserName", "User name exits");
 				requestDispatcher.forward(request, response);
-			} catch (ServletException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
 			}
 		}
 	}
 	
 	private void postLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username = request.getParameter("email");
+		String username = request.getParameter("user_name");
 		String password = request.getParameter("password");
+		request.setAttribute("user_name", username);
 		if (memberService.login(username, password)) {
-			List<Content> contentList = contentService.findAll();
-			request.setAttribute("contentList", contentList);
+			//set session for login later
 			HttpSession session = request.getSession();
 			session.setAttribute("username", username);
-			request.getRequestDispatcher("views/contentList.jsp").forward(request, response);
+			//forward
+			request.getRequestDispatcher("views/index.jsp").forward(request, response);
 		} else {
-			request.setAttribute("name", username);
+			request.setAttribute("user_name", username);
 			request.setAttribute("error", "Incorrect email or password");
 			request.getRequestDispatcher("views/login.jsp").forward(request, response);
 		}
 	}
-
 }

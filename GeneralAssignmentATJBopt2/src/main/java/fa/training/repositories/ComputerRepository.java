@@ -19,7 +19,8 @@ public interface ComputerRepository extends JpaRepository<May, String>{
 	List<May> findByMaMayContains(String maMay);
 	List<May> findByTrangThai(boolean trangThai);
 	
-	@Query(value = "SELECT d FROM May d WHERE d.maMay LIKE ?1% "
+	@Query(value = "SELECT d FROM May d "
+			+ "WHERE d.maMay LIKE ?1% "
 			+ "OR d.viTri LIKE ?1% "
 			+ "OR d.trangThai LIKE ?1% ")
 	List<May> findAllByKeyWord(String keyword);

@@ -42,14 +42,9 @@ public class CustomerController {
 		int pageSize = 5;
 		Page<KhachHang> page = customerService.findAll(currentPage, pageSize);
 		List<KhachHang> customers = page.getContent();
-		System.out.println(customers.toString());
-		System.out.println(page.getTotalPages());
-		System.out.println(page.getTotalElements());
-		System.out.println(currentPage);
-		System.out.println(customers.toString());
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("totalPages", page.getTotalPages());
-		model.addAttribute("totalElements", page.getTotalElements());
+//		model.addAttribute("totalElements", page.getTotalElements());
 		model.addAttribute("customers", customers);
 		return "customer/list";
 	}

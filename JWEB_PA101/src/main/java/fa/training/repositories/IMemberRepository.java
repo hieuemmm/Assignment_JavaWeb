@@ -9,6 +9,6 @@ public interface IMemberRepository {
 
 	boolean saveRegister(Member member);
 
-	boolean save(Member member);
+	boolean saveEdit(Member member);
 
 }

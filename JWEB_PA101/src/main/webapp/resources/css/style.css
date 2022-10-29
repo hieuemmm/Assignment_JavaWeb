@@ -187,6 +187,12 @@ header #dropdownMenuButton i {
 }
 
 /* VALIDATION */
+.server-message {
+    color: #f33a58;
+}
+.server-message.success {
+    color: green !important;;
+}
 .form-group .form-message {
     display: none;
 }

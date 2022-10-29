@@ -14,11 +14,11 @@ import fa.training.utils.DBconnection;
 
 public class ContentRepository_Impl implements IContentRepository {
 	DBconnection dBconnection = new DBconnection();
-	private final String SELECT_ALL_CONTENT = "select * from content";
-	private final String INSERT_INTO_CONTENT ="insert into Content(title,brief,content,created_date,update_time) values (?,?,?,?,?)";
+	private final String SELECT_ALL_CONTENT = "select * from content where user_name = ?";
+	private final String INSERT_INTO_CONTENT ="insert into Content(title,brief,content,created_date,user_name) values (?,?,?,?,?)";
 	
 	@Override
-	public List<Content> findAll() {
+	public List<Content> findAllByUser(String userName) {
 		List<Content> contentList = new ArrayList<>();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -26,6 +26,7 @@ public class ContentRepository_Impl implements IContentRepository {
         try {
         	connection = dBconnection.getConnection();
         	preparedStatement = connection.prepareStatement(SELECT_ALL_CONTENT);
+        	preparedStatement.setString(1, userName);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				System.out.println(resultSet.getDate("created_date"));
@@ -33,11 +34,10 @@ public class ContentRepository_Impl implements IContentRepository {
 				String title = resultSet.getString("title");
 				String brief = resultSet.getString("brief");
 				String content = resultSet.getString("content");
-				String createdDate = String.valueOf(resultSet.getDate("created_date"));
+				String createdDate = resultSet.getString("created_date");
 				String updateTime = resultSet.getString("update_time");
-				int authorID = resultSet.getInt("author_id");
-				System.out.println(brief);
-				Content content1 = new Content(contentID, title, brief, content, createdDate, updateTime, authorID);
+				String userNameDB = resultSet.getString("user_name");
+				Content content1 = new Content(contentID, title, brief, content, createdDate, updateTime, userNameDB);
 				contentList.add(content1);
 			}
         } catch (IOException e) {
@@ -67,20 +67,19 @@ public class ContentRepository_Impl implements IContentRepository {
 	}
 
 	@Override
-	public boolean saveContent(Content content1) {
+	public boolean saveContent(Content content) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		boolean check = false;
-		
         try {
         	connection = dBconnection.getConnection();
         	preparedStatement = connection.prepareStatement(INSERT_INTO_CONTENT);
         	
-			preparedStatement.setString(1, content1.getTitle());
-			preparedStatement.setString(2, content1.getBrief());
-			preparedStatement.setString(3, content1.getContent());
-			preparedStatement.setDate(4, Date.valueOf(content1.getCreatedDate()));
-			preparedStatement.setString(5, content1.getUpdateTime());
+			preparedStatement.setString(1, content.getTitle());
+			preparedStatement.setString(2, content.getBrief());
+			preparedStatement.setString(3, content.getContent());
+			preparedStatement.setString(4, content.getCreatedDate());
+			preparedStatement.setString(5, content.getUseName());
 			check = preparedStatement.executeUpdate() > 0;
         } catch (IOException e) {
             e.printStackTrace();

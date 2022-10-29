@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import fa.training.entities.Content;
 import fa.training.services.IContentService;
+import fa.training.utils.DateUtil;
 import fa.training.services.ContentService_Impl;
 
 import javax.servlet.annotation.*;
@@ -54,26 +55,15 @@ public class ContentServlet extends HttpServlet {
 		String title = request.getParameter("title");
 		String brief = request.getParameter("brief");
 		String content = request.getParameter("content");
-		LocalDateTime ldt = LocalDateTime.now();
-
-		String createDate = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.CHINESE).format(ldt);
-		String updateTime = DateTimeFormatter.ofPattern("hh:mm", Locale.CHINESE).format(ldt);
-		Content content1 = new Content(title, brief, content, createDate, updateTime);
-		boolean check = contentService.saveContent(content1);
-		if (check) {
-			request.setAttribute("mess", "Thêm thành công");
-		} else {
-			request.setAttribute("mess", "Thêm thất bại");
-		}
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("views/contentList.jsp");
-		request.setAttribute("contentList", contentService.findAll());
-		try {
-			requestDispatcher.forward(request, response);
-		} catch (ServletException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		String createDate = DateUtil.getDateTime();
+		String userName = (String) request.getSession().getAttribute("username");
+		Content contentArticle = new Content(title, brief, content, createDate);
+		contentArticle.setUseName(userName);
+		contentService.saveContent(contentArticle);
+		//get all
+		request.setAttribute("contentList", contentService.findAllByUser(userName));
+		
+		request.getRequestDispatcher("views/contentList.jsp").forward(request, response);
 	}
 
 	private boolean checkLogin(HttpServletRequest request, HttpServletResponse response)
@@ -87,12 +77,13 @@ public class ContentServlet extends HttpServlet {
 	}
 
 	private void getListContent(HttpServletRequest request, HttpServletResponse response) {
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("views/contentList.jsp");
-		List<Content> contentList = contentService.findAll();
-		request.setAttribute("contentList", contentList);
+		String userName = (String) request.getSession().getAttribute("username");
+		request.setAttribute("contentList", contentService.findAllByUser(userName));
 		try {
-			requestDispatcher.forward(request, response);
-		} catch (ServletException | IOException e) {
+			request.getRequestDispatcher("views/contentList.jsp").forward(request, response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

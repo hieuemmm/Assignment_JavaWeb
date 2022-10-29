@@ -10,8 +10,8 @@ public class ContentService_Impl implements IContentService {
 	IContentRepository contentRepository = new ContentRepository_Impl();
 
 	@Override
-	public List<Content> findAll() {
-		return contentRepository.findAll();
+	public List<Content> findAllByUser(String userName) {
+		return contentRepository.findAllByUser(userName);
 	}
 
 	@Override

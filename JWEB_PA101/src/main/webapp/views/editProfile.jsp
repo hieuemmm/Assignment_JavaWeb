@@ -32,47 +32,62 @@
 			<hr>
 			<form id="form-edit-profile" class="form"  method="post" action="/JWEB_PA101/member">
 				<div class="form-title">Profile Form Elements</div>
-				<input type="hidden" name="id_member" value="${member.getMemberId()}">
 				<div class="form-body ">
+					<div class="server-message success mb-2">${messageSuccess}</div>
 					<div class="form-group">
-						<label for="inputEmail">User name: </label> 
-						<span id="inputUserName" class="" name="inputEmail">${member.getUserName()}</span>
+						<label>User name: </label> 
+						<span>${member.getUserName()}</span>
 					</div>
 					<div class="form-group">
 						<label for="inputFirstName">First Name</label> 
 						<input
-							id="inputFirstName" value="${member.getFirstName()}"
-							name="firstName" class="form-control h-45" type="text"
-							placeholder="Enter the first name" maxlength="50"> 
+							id="inputFirstName" 
+							value="${member.getFirstName()}"
+							name="firstName" 
+							class="form-control h-45" 
+							type="text"
+							placeholder="Enter the first name" 
+							maxlength="50"> 
 						<span class="form-message"></span>
 					</div>
 					<div class="form-group">
-						<label for="inputLastName">Last Name</label> <input
-							id="inputLastName" value="${member.getLastName()}"
-							name="lastName" class="form-control h-45" type="text"
-							placeholder="Enter the last name" maxlength="50"> <span
-							class="form-message"></span>
+						<label for="inputLastName">Last Name</label> 
+						<input
+							id="inputLastName" 
+							value="${member.getLastName()}"
+							name="lastName" 
+							class="form-control h-45" 
+							type="text"
+							placeholder="Enter the last name" 
+							maxlength="50"> 
+							<span class="form-message"></span>
 					</div>
 					<div class="form-group">
-						<label for="inputEmail">Email: </label> 
-						<input type="hidden" name="email" value="${member.getEmail()}"> 
-						<span id="inputEmail" class="" name="inputEmail">${member.getEmail()}</span>
+						<label>Email: </label> 
+						<span>${member.getEmail()}</span>
 					</div>
 					<div class="form-group">
 						<label for="inputPhone">Phone</label> 
-						<input id="inputPhone" class="form-control h-45" value="${member.getPhone()}" name="phone" type="text" placeholder="Enter the phone">
+						<input id="inputPhone" 
+							class="form-control h-45" 
+							value="${member.getPhone()}" 
+							name="phone" 
+							type="text" 
+							placeholder="Enter the phone">
 						<span class="form-message"></span>
 					</div>
 					<div class="form-group">
 						<label for="inputDescription">Description</label>
-						<textarea id="inputDescription" class="form-control" name="description" rows="2">${member.getDescription()}</textarea>
+						<textarea id="inputDescription" 
+							class="form-control" 
+							name="description" 
+							rows="2">${member.getDescription()}</textarea>
 						<span class="form-message"></span>
 					</div>
 					<div class="form-group">
 						<button type="submit" class="btn">Submit button</button>
 						<button type="reset" class="btn">Reset button</button>
 					</div>
-					<p>${member.toString()}</p>
 				</div>
 			</form>
 		</section>

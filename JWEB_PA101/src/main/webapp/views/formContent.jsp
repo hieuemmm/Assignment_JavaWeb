@@ -35,6 +35,7 @@
                     Content Form Elements
                 </div>
                 <div class="form-body ">
+                	<span class="server-message">${messageEror}</span>
                     <div class="form-group">
                         <label for="inputTitle">Title</label>
                         <input id="inputTitle" class="form-control h-45" name="title" type="text"

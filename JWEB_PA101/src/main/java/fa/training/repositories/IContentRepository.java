@@ -5,6 +5,6 @@ import java.util.List;
 import fa.training.entities.Content;
 
 public interface IContentRepository {
-	List<Content> findAll();
-	boolean saveContent(Content content1);
+	List<Content> findAllByUser(String userName);
+	boolean saveContent(Content content);
 }
